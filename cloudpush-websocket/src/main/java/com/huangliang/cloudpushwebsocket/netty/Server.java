@@ -30,7 +30,7 @@ public class Server {
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-    @Value("${eureka.instance.instance-id}")
+    @Value("${instance.instance-id}")
     public String instanceId;
 
     @Autowired

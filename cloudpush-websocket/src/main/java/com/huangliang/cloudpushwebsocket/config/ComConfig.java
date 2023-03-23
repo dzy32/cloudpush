@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class ComConfig {
     @Value("${hostip}")
     private String hostip;
-    @Value("${eureka.instance.instance-id}")
+    @Value("${instance.instance-id}")
     private String instanceId;
     @Value("${config.client.interval-time}")
     private Integer intervalTime;

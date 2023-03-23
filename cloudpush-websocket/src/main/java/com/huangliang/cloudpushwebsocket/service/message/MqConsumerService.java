@@ -7,6 +7,7 @@ import com.huangliang.api.constants.Constants;
 import com.huangliang.api.entity.WebsocketMessage;
 import com.huangliang.api.entity.request.SendRequest;
 import com.huangliang.api.util.UUIDUtils;
+import com.huangliang.cloudpushwebsocket.config.ComConfig;
 import com.huangliang.cloudpushwebsocket.constants.AttrConstants;
 import com.huangliang.cloudpushwebsocket.service.channel.ChannelService;
 import io.github.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
@@ -31,8 +32,10 @@ import java.util.Set;
 @Slf4j
 public class MqConsumerService extends AbstractRocketMqConsumer<RocketMqTopic, RocketMqContent> {
 
-    @Value("${eureka.instance.instance-id}")
-    private String instanceId;
+    @Autowired
+    private ComConfig comConfig;
+//    @Value("${eureka.instance.instance-id}")
+//    private String instanceId;
 
     @Autowired
     private ChannelService channelService;
@@ -88,7 +91,7 @@ public class MqConsumerService extends AbstractRocketMqConsumer<RocketMqTopic, R
     @Override
     public Map<String, Set<String>> subscribeTopicTags() {
         Map<String, Set<String>> map = new HashMap<>();
-        map.put(RocketMQConfig.getWebsocketTopic(instanceId), null);
+        map.put(RocketMQConfig.getWebsocketTopic(comConfig.getInstanceId()), null);
         return map;
     }
 
@@ -98,7 +101,7 @@ public class MqConsumerService extends AbstractRocketMqConsumer<RocketMqTopic, R
      */
     @Override
     public String getConsumerGroup() {
-        return RocketMQConfig.getWebsocketGroup(instanceId);
+        return RocketMQConfig.getWebsocketGroup(comConfig.getInstanceId());
     }
 
 }

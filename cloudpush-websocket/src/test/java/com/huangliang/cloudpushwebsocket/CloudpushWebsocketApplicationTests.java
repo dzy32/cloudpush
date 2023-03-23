@@ -1,7 +1,5 @@
 package com.huangliang.cloudpushwebsocket;
 
-import com.huangliang.api.constants.RedisPrefix;
-import com.netflix.discovery.converters.Auto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

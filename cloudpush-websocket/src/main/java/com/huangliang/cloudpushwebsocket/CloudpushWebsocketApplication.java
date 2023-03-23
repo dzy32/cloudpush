@@ -10,12 +10,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.ComponentScan;
 
 @Slf4j
 @SpringBootApplication
+@ComponentScan("com.huangliang.**")
+@RefreshScope
+@EnableDiscoveryClient
 public class CloudpushWebsocketApplication implements CommandLineRunner {
 
-    private static String yamlPath = "application.yml";
+    private static String yamlPath = "bootstrap.yml";
     private static String yamlKey = "hostip";
 
     @Value("${hostip}")

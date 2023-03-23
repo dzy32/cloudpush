@@ -1,0 +1,40 @@
+server:
+  port: 9006
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.167:30901
+        namespace: mtapp-websocket
+        group: DEFAULT_GROUP
+      config:
+        server-addr: 192.168.1.167:30901
+        namespace: mtapp-websocket
+        extension-configs:
+          - data-id: common-redis.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          - data-id: common-rocketmq.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+          - data-id: common-base.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+  application:
+    name: mtapp-websocket
+hostip: ${hostip}
+instance:
+  prefer-ip-address: true  # 访问路径可以显示IP地址
+  lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+  lease-expiration-duration-in-seconds: 10
+  instance-id: ${hostip}:${server.port}   #显示服务名称(ip:port集群需不同名,如果重复会覆盖之前的实例)
+config:
+  client:
+    #客户端在redis中的有效时间(s)
+    expire-time: 120
+    #判断客户端的过期间隔时间(s)
+    interval-time: 60
+    #批量更新redis中客户端的活跃时间的间隔时间(s)
+    interval-client-active-time: 5
+    #redis分页提交数量(条)
+    pipeline-page-size: 1000
